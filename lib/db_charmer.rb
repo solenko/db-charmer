@@ -206,3 +206,11 @@ else
   # Open up really useful API method
   ActiveRecord::AssociationPreload::ClassMethods.send(:public, :preload_associations)
 end
+
+if DbCharmer.rails3?
+  class DbCharmerTask < Rails::Railtie
+    rake_tasks do
+      Dir[File.join(File.dirname(__FILE__),'tasks/*.rake')].each { |f| load f }
+    end
+  end
+end
